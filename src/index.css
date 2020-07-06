@@ -11,3 +11,68 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+}
+
+.start-nav-ul {
+  flex-grow: 4;
+}
+
+.end-nav-ul {
+  flex-grow: 0;
+}
+
+.nav .login-user-title {
+  padding: 0 1rem;
+}
+
+.nav ul {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+  border-bottom: 1px lightskyblue solid;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  font-size: 1.1rem;
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.active {
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.user-avatar {
+  margin: 0 0.5rem;
+}
