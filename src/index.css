@@ -22,12 +22,13 @@ code {
   margin: 0;
 }
 .card-container > .ant-tabs-card .ant-tabs-content {
-  height: 120px;
   margin-top: -16px;
 }
 .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
   padding: 16px;
+  display: grid;
+  grid-gap: 1rem;
 }
 .card-container > .ant-tabs-card > .ant-tabs-nav::before {
   display: none;
@@ -48,7 +49,6 @@ code {
   padding: 24px;
 }
 [data-theme='compact'] .card-container > .ant-tabs-card .ant-tabs-content {
-  height: 120px;
   margin-top: -8px;
 }
 [data-theme='dark'] .card-container > .ant-tabs-card .ant-tabs-tab {

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Layout, Tabs } from 'antd';
 
+//Main Components
+import Question from './Question'
+
+
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
@@ -11,14 +15,11 @@ class Home extends Component {
         <div className="card-container">
           <Tabs type="card">
             <TabPane tab="UnAnswered Questions" key="1">
-              <p>Content of Tab Pane 1</p>
-              <p>Content of Tab Pane 1</p>
-              <p>Content of Tab Pane 1</p>
+              <Question />
+              <Question />
             </TabPane>
             <TabPane tab="Answered Questions" key="2">
-              <p>Content of Tab Pane 2</p>
-              <p>Content of Tab Pane 2</p>
-              <p>Content of Tab Pane 2</p>
+              <Question />
             </TabPane>
           </Tabs>
         </div>

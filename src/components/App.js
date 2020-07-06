@@ -5,9 +5,8 @@ import { Layout } from 'antd';
 import { handleInitialData } from '../store/actions/shared';
 import NavBar from './NavBar';
 
-// Site Components
+// Main Components
 import Home from './Home'
-
 
 class App extends Component {
   componentDidMount() {
