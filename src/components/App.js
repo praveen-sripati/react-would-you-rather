@@ -6,24 +6,36 @@ import { handleInitialData } from '../store/actions/shared';
 import NavBar from './NavBar';
 
 // Main Components
-import Home from './Home'
+import Home from './Home';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }
   render() {
+    const { loading } = this.props;
+    console.log(loading);
     return (
       <Router>
         <Layout className="container">
           <NavBar />
-          <Route exact to="/">
-            <Home />
-          </Route>
+          {loading ? (
+            <h2>Loading...</h2>
+          ) : (
+            <Route exact to="/">
+              <Home />
+            </Route>
+          )}
         </Layout>
       </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null,
+  };
+}
+
+export default connect(mapStateToProps)(App);
