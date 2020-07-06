@@ -128,6 +128,10 @@ li {
   text-decoration: none;
 }
 
+.nav-title {
+  padding: 5px;
+}
+
 .active {
   font-weight: bold;
   color: #1890ff;
