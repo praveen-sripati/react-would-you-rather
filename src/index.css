@@ -204,6 +204,8 @@ li {
 }
 
 .new-question-btn {
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
   width: 100%;
 }
 

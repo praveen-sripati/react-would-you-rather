@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Typography, Input, Divider, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { handleAddQuestion } from '../store/actions/questions';
 
 const { Title, Text } = Typography;
 
 class NewQuestion extends Component {
   state = {
-    optionOneValue: '',
-    optionTwoValue: '',
+    optionOneText: '',
+    optionTwoText: '',
     toHome: false,
   };
 
   handleOnChangeTextOne = (e) => {
     this.setState({
-      optionOneValue: e.target.value,
+      optionOneText: e.target.value,
     });
   };
 
   handleOnChangeTextTwo = (e) => {
     this.setState({
-      optionTwoValue: e.target.value,
+      optionTwoText: e.target.value,
     });
   };
 
   handleSubmit = (e) => {
-    return e;
+    e.preventDefault();
+    const { dispatch, authedUser } = this.props;
+    const { optionOneText, optionTwoText } = this.state;
+    const question = {
+      optionOneText,
+      optionTwoText,
+      author: authedUser,
+    }
+    dispatch(handleAddQuestion(question));
   };
 
   render() {
@@ -49,22 +57,26 @@ class NewQuestion extends Component {
           placeholder="Enter Option One Text Here"
           onChange={this.handleOnChangeTextTwo}
         />
-        <Link to="/" style={{ marginTop: '1.5rem' }}>
-          <Button
-            size="large"
-            type="primary"
-            className="new-question-btn"
-            onClick={this.handleSubmit}
-            disabled={
-              this.state.optionOneValue === '' || this.state.optionTwoValue === ''
-            }
-          >
-            Submit
-          </Button>
-        </Link>
+        <Button
+          size="large"
+          type="primary"
+          className="new-question-btn"
+          onClick={this.handleSubmit}
+          disabled={
+            this.state.optionOneText === '' || this.state.optionTwoText === ''
+          }
+        >
+          Submit
+        </Button>
       </div>
     );
   }
 }
 
-export default NewQuestion;
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+  };
+}
+
+export default connect(mapStateToProps)(NewQuestion);
