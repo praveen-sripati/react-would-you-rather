@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Typography, Avatar } from 'antd';
+import LoadingBar from 'react-redux-loading-bar';
 import {
   TrophyOutlined,
   PlusOutlined,
@@ -13,6 +14,7 @@ const { Text } = Typography;
 class NavBar extends Component {
   render() {
     return (
+
       <nav className="nav">
         <ul className="start-nav-ul">
           <li>
@@ -49,6 +51,7 @@ class NavBar extends Component {
             </NavLink>
           </li>
         </ul>
+        <LoadingBar />
       </nav>
     );
   }

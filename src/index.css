@@ -165,3 +165,12 @@ li {
   margin-top: 1rem;
 }
 /* Question Card End */
+
+/* Loading Spinner */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}

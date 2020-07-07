@@ -7,10 +7,11 @@ const { Title, Text } = Typography;
 
 class Question extends Component {
   render() {
+    const { name } = this.props;
     const { author, optionOne } = this.props.question;
 
     return (
-      <Card title={`${author} asks`}>
+      <Card title={`${name} asks`}>
         <div className="question-content">
           <div>
             <Avatar
@@ -32,16 +33,22 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { id }) {
   const question = questions[id];
+
   const optionOneText = question.optionOne.text;
   const optionTwoText = question.optionTwo.text;
+  const { author } = question;
+
+  const name = users[author].name;
+
   return {
     authedUser,
+    name,
     question: formatQuestion({
       optionOneText,
       optionTwoText,
-      author: authedUser,
+      author,
     }),
   };
 }
