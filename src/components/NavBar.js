@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Typography, Avatar } from 'antd';
 import LoadingBar from 'react-redux-loading-bar';
 import {
@@ -13,8 +14,11 @@ const { Text } = Typography;
 
 class NavBar extends Component {
   render() {
-    return (
 
+    const {user} = this.props;
+    console.log(user)
+
+    return (
       <nav className="nav">
         <ul className="start-nav-ul">
           <li>
@@ -39,7 +43,7 @@ class NavBar extends Component {
         <ul className="end-nav-ul">
           <li>
             <Text className="login-user-title" strong>
-              Hello, Sara{' '}
+              Hello, {user === undefined ? <span>Friend</span>: user.name}
               <Avatar
                 className="user-avatar"
                 src="https://api.adorable.io/avatars/120/sarahedo.png"
@@ -57,4 +61,13 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+function mapStateToProps({ authedUser, users }) {
+  const user = users[authedUser]
+  return {
+    authedUser,
+    user
+  }
+}
+
+
+export default connect(mapStateToProps)(NavBar);
