@@ -9,14 +9,14 @@ import {
   HomeOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
+import { authedUser } from '../store/reducers/authedUser';
 
 const { Text } = Typography;
 
 class NavBar extends Component {
   render() {
-
-    const {user} = this.props;
-    console.log(user)
+    const { user } = this.props;
+    console.log(user);
 
     return (
       <nav className="nav">
@@ -42,13 +42,15 @@ class NavBar extends Component {
         </ul>
         <ul className="end-nav-ul">
           <li>
-            <Text className="login-user-title" strong>
-              Hello, {user === undefined ? <span>Friend</span>: user.name}
-              <Avatar
-                className="user-avatar"
-                src="https://api.adorable.io/avatars/120/sarahedo.png"
-              />
-            </Text>
+            {user !== undefined ? (
+              <Text className="login-user-title" strong>
+                Hello, {user.name}
+                <Avatar
+                  className="user-avatar"
+                  src={`https://api.adorable.io/avatars/120/${user.id}.png`}
+                />
+              </Text>
+            ) : null}
             <NavLink to="/login" exact activeClassName="active">
               <LogoutOutlined />
               <span className="nav-title">Logout</span>
@@ -62,12 +64,10 @@ class NavBar extends Component {
 }
 
 function mapStateToProps({ authedUser, users }) {
-  const user = users[authedUser]
+  const user = users[authedUser];
   return {
-    authedUser,
-    user
-  }
+    user,
+  };
 }
-
 
 export default connect(mapStateToProps)(NavBar);

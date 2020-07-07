@@ -89,10 +89,7 @@ a {
 
 .nav {
   display: flex;
-}
-
-.nav {
-  display: flex;
+  height: 5rem;
 }
 
 .start-nav-ul {
