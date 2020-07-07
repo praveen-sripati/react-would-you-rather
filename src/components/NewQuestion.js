@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Typography, Input, Divider, Button } from 'antd';
-import { handleAddQuestion } from '../store/actions/questions';
+import { handleAddQuestion } from '../store/actions/shared';
 import { Redirect } from 'react-router-dom';
 
 const { Title, Text } = Typography;

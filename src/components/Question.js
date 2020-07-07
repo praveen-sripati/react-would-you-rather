@@ -17,6 +17,11 @@ class Question extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    // submit answer
+  }
+
   render() {
     const { name, status } = this.props;
     const { author, optionOne, optionTwo } = this.props.question;
@@ -54,6 +59,7 @@ class Question extends Component {
                 <Button
                   type="primary"
                   className="unanswered-question-section__btn"
+                  onClick={this.handleSubmit}
                 >
                   Submit
                 </Button>
