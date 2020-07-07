@@ -192,6 +192,23 @@ li {
 }
 /* Question Page End */
 
+/* New Question */
+.new-question-container {
+  margin: 0 auto;
+  width: 75%;
+  padding: 1rem;
+  border: 1px #f5f5f5 solid;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.new-question-btn {
+  margin-top: 1.5rem;
+}
+
+/* New Question End */
+
 /* Loading Spinner */
 
 .loading {
