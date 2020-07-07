@@ -168,6 +168,12 @@ li {
   margin-top: 1rem;
   width: 100%;
 }
+
+.question-radio-option {
+  display: block;
+  height: 30px;
+  lineHeight: 30px;
+}
 /* Question Card End */
 
 /* Question Page */
