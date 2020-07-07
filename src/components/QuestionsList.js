@@ -7,7 +7,7 @@ class QuestionsList extends Component {
     return (
       <div className="question-list">
         {questionsListIds.map((id) => (
-          <Question key={id} id={id} />
+          <Question status={null} key={id} id={id} />
         ))}
       </div>
     );

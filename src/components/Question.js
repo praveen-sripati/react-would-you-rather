@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatQuestion } from '../utils/helpers';
 import { Card, Avatar, Typography, Button, Divider } from 'antd';
@@ -7,9 +8,10 @@ const { Title, Text } = Typography;
 
 class Question extends Component {
   render() {
-    const { name } = this.props;
+    const { name, status } = this.props;
     const { author, optionOne } = this.props.question;
 
+    console.log(this.props);
     return (
       <Card title={`${name} asks`}>
         <div className="question-content">
@@ -23,9 +25,15 @@ class Question extends Component {
           <div className="question-content-details">
             <Title level={4}>Would you rather</Title>
             <Text>{optionOne.text}</Text>
-            <Button className="question-content-details__poll_btn">
-              View Poll
-            </Button>
+            {status === 'unanswered' && <h2>unanswered</h2>}
+            {status === 'answered' && <h2>answered</h2>}
+            {status === null && (
+              <Link to={`/question/${this.props.id}`}>
+                <Button className="question-content-details__poll_btn">
+                  View Poll
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </Card>
@@ -33,7 +41,7 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ authedUser, users, questions }, { id, status }) {
   const question = questions[id];
 
   const optionOneText = question.optionOne.text;
@@ -50,6 +58,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
       optionTwoText,
       author,
     }),
+    status,
   };
 }
 

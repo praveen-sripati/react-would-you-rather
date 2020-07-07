@@ -166,8 +166,16 @@ li {
 
 .question-content-details__poll_btn {
   margin-top: 1rem;
+  width: 100%;
 }
 /* Question Card End */
+
+/* Question Page */
+.question-page-container {
+  margin: 0 auto;
+  width: 75%;
+}
+/* Question Page End */
 
 /* Loading Spinner */
 
@@ -177,3 +185,5 @@ li {
   justify-content: center;
   height: 80vh;
 }
+
+/* Loading Spinner End */
