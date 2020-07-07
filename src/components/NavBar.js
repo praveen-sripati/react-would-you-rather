@@ -9,7 +9,6 @@ import {
   HomeOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import { authedUser } from '../store/reducers/authedUser';
 
 const { Text } = Typography;
 

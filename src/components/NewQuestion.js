@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Typography, Input, Divider, Button } from 'antd';
 import { handleAddQuestion } from '../store/actions/questions';
+import { Redirect } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
@@ -32,11 +33,20 @@ class NewQuestion extends Component {
       optionOneText,
       optionTwoText,
       author: authedUser,
-    }
+    };
     dispatch(handleAddQuestion(question));
+    this.setState({
+      optionOneText: '',
+      optionTwoText: '',
+      toHome: true,
+    });
   };
 
   render() {
+    const { toHome } = this.state;
+    if (toHome) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="new-question-container">
         <Title style={{ textAlign: 'center' }}>Create New Question</Title>
