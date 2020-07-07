@@ -33,9 +33,8 @@ class Question extends Component {
           <Divider className="question-content-divider" type="vertical" />
           <div className="question-content-details">
             <Title level={4}>Would you rather...</Title>
-
             {status === 'unanswered' && (
-              <div>
+              <div className="unanswered-question-section">
                 <Radio.Group onChange={this.onChange} value={this.state.value}>
                   <Radio className="question-radio-option" value={1}>
                     {optionOne.text}
@@ -44,6 +43,7 @@ class Question extends Component {
                     {optionTwo.text}
                   </Radio>
                 </Radio.Group>
+                <Button type="primary">Submit</Button>
               </div>
             )}
             {status === 'answered' && <h2>answered</h2>}
@@ -51,7 +51,7 @@ class Question extends Component {
               <div>
                 <Text>{optionOne.text}</Text>
                 <Link to={`/question/${this.props.id}`}>
-                  <Button className="question-content-details__poll_btn">
+                  <Button type="primary" className="question-content-details__poll_btn">
                     View Poll
                   </Button>
                 </Link>

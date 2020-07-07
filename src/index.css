@@ -174,6 +174,11 @@ li {
   height: 30px;
   lineHeight: 30px;
 }
+
+.unanswered-question-section {
+  display: flex;
+  flex-flow: column wrap;
+}
 /* Question Card End */
 
 /* Question Page */
