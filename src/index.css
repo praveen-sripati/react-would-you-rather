@@ -27,8 +27,6 @@ code {
 .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
   padding: 16px;
-  display: grid;
-  grid-gap: 1rem;
 }
 .card-container > .ant-tabs-card > .ant-tabs-nav::before {
   display: none;
@@ -69,6 +67,11 @@ code {
 .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
   align-items: center;
   justify-content: center;
+}
+
+.question-list {
+  display: grid;
+  grid-gap: 1rem;
 }
 /* Home Cards End */
 

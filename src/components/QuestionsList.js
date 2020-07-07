@@ -5,7 +5,7 @@ class QuestionsList extends Component {
   render() {
     const { questionsListIds } = this.props;
     return (
-      <div>
+      <div className="question-list">
         {questionsListIds.map((id) => (
           <Question key={id} id={id} />
         ))}
