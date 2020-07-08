@@ -10,6 +10,7 @@ import Home from './Home';
 import NavBar from './NavBar';
 import QuestionPage from './QuestionPage';
 import NewQuestion from './NewQuestion';
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/new" component={NewQuestion} />
+              <Route exact path="/leaderboard" component={LeaderBoard} />
               <Route exact path="/question/:id" component={QuestionPage} />
             </Switch>
           )}
