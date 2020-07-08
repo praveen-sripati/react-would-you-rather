@@ -15,7 +15,6 @@ const { Text } = Typography;
 class NavBar extends Component {
   render() {
     const { user } = this.props;
-    console.log(user);
 
     return (
       <nav className="nav">

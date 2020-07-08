@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { formatQuestion } from '../utils/helpers';
 import { Card, Avatar, Typography, Button, Divider, Radio } from 'antd';
+import { handleSubmitAnswer } from '../store/actions/shared';
 
 const { Title, Text } = Typography;
 
@@ -18,14 +18,21 @@ class Question extends Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    // submit answer
-  }
+    e.preventDefault();
+
+    const { dispatch, authedUser, id } = this.props;
+    const { value } = this.state;
+
+    if (value === 1) {
+      dispatch(handleSubmitAnswer(authedUser, id, 'optionOne'));
+    } else {
+      dispatch(handleSubmitAnswer(authedUser, id, 'optionTwo'));
+    }
+  };
 
   render() {
     const { name, status } = this.props;
-    const { author, optionOne, optionTwo } = this.props.question;
-
+    const { author, optionOneText, optionTwoText } = this.props.question;
     return (
       <Card title={`${name} asks`}>
         <div className="question-content">
@@ -50,10 +57,10 @@ class Question extends Component {
               <div className="unanswered-question-section">
                 <Radio.Group onChange={this.onChange} value={this.state.value}>
                   <Radio className="question-radio-option" value={1}>
-                    {optionOne.text}
+                    {optionOneText}
                   </Radio>
                   <Radio className="question-radio-option" value={2}>
-                    {optionTwo.text}
+                    {optionTwoText}
                   </Radio>
                 </Radio.Group>
                 <Button
@@ -68,7 +75,7 @@ class Question extends Component {
             {status === 'answered' && <h2>answered</h2>}
             {status === null && (
               <div>
-                <Text>{optionOne.text}</Text>
+                <Text>{optionOneText}</Text>
                 <Link to={`/question/${this.props.id}`}>
                   <Button
                     type="primary"
@@ -98,11 +105,11 @@ function mapStateToProps({ authedUser, users, questions }, { id, status }) {
   return {
     authedUser,
     name,
-    question: formatQuestion({
+    question: {
       optionOneText,
       optionTwoText,
       author,
-    }),
+    },
     status,
   };
 }
