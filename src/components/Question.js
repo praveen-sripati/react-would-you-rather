@@ -39,7 +39,13 @@ class Question extends Component {
   };
 
   render() {
-    const { name, status, optionOneVotes, optionTwoVotes } = this.props;
+    const {
+      name,
+      authedUser,
+      status,
+      optionOneVotes,
+      optionTwoVotes,
+    } = this.props;
     const { author, optionOneText, optionTwoText } = this.props.question;
 
     const numOfOptionOneVotes = optionOneVotes.length;
@@ -113,8 +119,13 @@ class Question extends Component {
             {status === 'answered' && (
               <div className="answered-question-details">
                 <Text className="answered-question-title " strong>
-                  Would you rather {' '}
-                  <span className="answered-question-title__option">{optionOneText}</span>
+                  Would you rather{' '}
+                  <span className="answered-question-title__option">
+                    {optionOneText}
+                    {optionOneVotes.includes(authedUser) ? (
+                      <span style={{ color: 'black' }}> - You Voted</span>
+                    ) : null}
+                  </span>
                 </Text>
                 <div className="answered-question-progress-bar">
                   <Progress
@@ -134,7 +145,12 @@ class Question extends Component {
                 />
                 <Text className="answered-question-title " strong>
                   Would you rather{' '}
-                  <span className="answered-question-title__option">{optionTwoText}</span>
+                  <span className="answered-question-title__option">
+                    {optionTwoText}
+                    {optionTwoVotes.includes(authedUser) ? (
+                      <span style={{ color: 'black' }}> - You Voted</span>
+                    ) : null}
+                  </span>
                 </Text>
                 <div className="answered-question-progress-bar">
                   <Progress
