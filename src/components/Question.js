@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Card, Avatar, Typography, Button, Divider, Radio } from 'antd';
+import {
+  Card,
+  Avatar,
+  Typography,
+  Button,
+  Divider,
+  Radio,
+  Progress,
+} from 'antd';
 import { handleSubmitAnswer } from '../store/actions/shared';
 
 const { Title, Text } = Typography;
@@ -36,23 +44,42 @@ class Question extends Component {
     return (
       <Card title={`${name} asks`}>
         <div className="question-content">
-          <div>
-            <Avatar
-              src={`https://api.adorable.io/avatars/100/${author}.png`}
-              size={100}
-            />
-          </div>
+          {status === 'answered' ? (
+            <div>
+              <Avatar
+                src={`https://api.adorable.io/avatars/100/${author}.png`}
+                size={150}
+              />
+            </div>
+          ) : (
+            <div>
+              <Avatar
+                src={`https://api.adorable.io/avatars/100/${author}.png`}
+                size={100}
+              />
+            </div>
+          )}
           {status === null ? (
             <Divider className="question-content-divider" type="vertical" />
-          ) : (
+          ) : status === 'unanswered' ? (
             <Divider
               style={{ height: '7.5rem' }}
               className="question-content-divider"
               type="vertical"
             />
+          ) : (
+            <Divider
+              style={{ height: '12rem' }}
+              className="question-content-divider"
+              type="vertical"
+            />
           )}
           <div className="question-content-details">
-            <Title level={4}>Would you rather...</Title>
+            {status !== 'answered' ? (
+              <Title level={4}>Would you rather...</Title>
+            ) : (
+              <Title level={3}>Results</Title>
+            )}
             {status === 'unanswered' && (
               <div className="unanswered-question-section">
                 <Radio.Group onChange={this.onChange} value={this.state.value}>
@@ -72,7 +99,34 @@ class Question extends Component {
                 </Button>
               </div>
             )}
-            {status === 'answered' && <h2>answered</h2>}
+            {status === 'answered' && (
+              <div className="answered-question-details">
+                <Text style={{ marginBottom: '0.1rem' }} strong>
+                  Would you rather{' '}
+                  <span style={{ color: '#ff4d4f' }}>{optionOneText}</span>
+                </Text>
+                <Progress
+                  type="line"
+                  strokeWidth={30}
+                  percent={50}
+                  showInfo={false}
+                />
+                <Divider
+                  className="answered-question-vertical-divider"
+                  type="horizontal"
+                />
+                <Text style={{ marginBottom: '0.1rem' }} strong>
+                  Would you rather{' '}
+                  <span style={{ color: '#ff4d4f' }}>{optionTwoText}</span>
+                </Text>
+                <Progress
+                  type="line"
+                  strokeWidth={30}
+                  percent={50}
+                  showInfo={false}
+                />
+              </div>
+            )}
             {status === null && (
               <div>
                 <Text>{optionOneText}</Text>
