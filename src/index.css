@@ -214,6 +214,19 @@ li {
   align-self: center;
   width: 40px;
 }
+
+.answered-question-title {
+  margin-bottom: 0.1rem;
+}
+
+.answered-question-title__option {
+  color: #ff4d4f;
+}
+
+.answered-question-votes {
+  margin-top: 1rem;
+  text-align: center;
+}
 /* Question Card End */
 
 /* Question Page */

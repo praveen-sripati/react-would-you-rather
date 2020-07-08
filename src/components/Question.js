@@ -42,12 +42,14 @@ class Question extends Component {
     const { name, status, optionOneVotes, optionTwoVotes } = this.props;
     const { author, optionOneText, optionTwoText } = this.props.question;
 
+    const numOfOptionOneVotes = optionOneVotes.length;
+    const numOfOptionTwoVotes = optionTwoVotes.length;
     const totalVotes = optionOneVotes.length + optionTwoVotes.length;
     const optionOneVotePercentage = Number(
-      ((optionOneVotes.length / totalVotes) * 100).toFixed(2)
+      ((numOfOptionOneVotes / totalVotes) * 100).toFixed(2)
     );
     const optionTwoVotePercentage = Number(
-      ((optionTwoVotes.length / totalVotes) * 100).toFixed(2)
+      ((numOfOptionTwoVotes / totalVotes) * 100).toFixed(2)
     );
 
     return (
@@ -78,7 +80,7 @@ class Question extends Component {
             />
           ) : (
             <Divider
-              style={{ height: '12rem' }}
+              style={{ height: '16rem' }}
               className="question-content-divider"
               type="vertical"
             />
@@ -110,9 +112,9 @@ class Question extends Component {
             )}
             {status === 'answered' && (
               <div className="answered-question-details">
-                <Text style={{ marginBottom: '0.1rem' }} strong>
-                  Would you rather{' '}
-                  <span style={{ color: '#ff4d4f' }}>{optionOneText}</span>
+                <Text className="answered-question-title " strong>
+                  Would you rather {' '}
+                  <span className="answered-question-title__option">{optionOneText}</span>
                 </Text>
                 <div className="answered-question-progress-bar">
                   <Progress
@@ -123,13 +125,16 @@ class Question extends Component {
                   />
                   <span className="answered-question-progress-bar-percent">{`${optionOneVotePercentage}%`}</span>
                 </div>
+                <Text strong className="answered-question-votes">
+                  {numOfOptionOneVotes} out of {totalVotes}
+                </Text>
                 <Divider
                   className="answered-question-vertical-divider"
                   type="horizontal"
                 />
-                <Text style={{ marginBottom: '0.1rem' }} strong>
+                <Text className="answered-question-title " strong>
                   Would you rather{' '}
-                  <span style={{ color: '#ff4d4f' }}>{optionTwoText}</span>
+                  <span className="answered-question-title__option">{optionTwoText}</span>
                 </Text>
                 <div className="answered-question-progress-bar">
                   <Progress
@@ -140,6 +145,9 @@ class Question extends Component {
                   />
                   <span className="answered-question-progress-bar-percent">{`${optionTwoVotePercentage}%`}</span>
                 </div>
+                <Text strong className="answered-question-votes">
+                  {numOfOptionTwoVotes} out of {totalVotes}
+                </Text>
               </div>
             )}
             {status === null && (
