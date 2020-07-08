@@ -39,10 +39,19 @@ class Question extends Component {
   };
 
   render() {
-    const { name, status } = this.props;
+    const { name, status, optionOneVotes, optionTwoVotes } = this.props;
     const { author, optionOneText, optionTwoText } = this.props.question;
+
+    const totalVotes = optionOneVotes.length + optionTwoVotes.length;
+    const optionOneVotePercentage = Number(
+      ((optionOneVotes.length / totalVotes) * 100).toFixed(2)
+    );
+    const optionTwoVotePercentage = Number(
+      ((optionTwoVotes.length / totalVotes) * 100).toFixed(2)
+    );
+
     return (
-      <Card title={`${name} asks`}>
+      <Card title={status === 'answered' ? `Asked by ${name}` : `${name} asks`}>
         <div className="question-content">
           {status === 'answered' ? (
             <div>
@@ -105,12 +114,15 @@ class Question extends Component {
                   Would you rather{' '}
                   <span style={{ color: '#ff4d4f' }}>{optionOneText}</span>
                 </Text>
-                <Progress
-                  type="line"
-                  strokeWidth={30}
-                  percent={50}
-                  showInfo={false}
-                />
+                <div className="answered-question-progress-bar">
+                  <Progress
+                    type="line"
+                    strokeWidth={30}
+                    percent={optionOneVotePercentage}
+                    showInfo={false}
+                  />
+                  <span className="answered-question-progress-bar-percent">{`${optionOneVotePercentage}%`}</span>
+                </div>
                 <Divider
                   className="answered-question-vertical-divider"
                   type="horizontal"
@@ -119,12 +131,15 @@ class Question extends Component {
                   Would you rather{' '}
                   <span style={{ color: '#ff4d4f' }}>{optionTwoText}</span>
                 </Text>
-                <Progress
-                  type="line"
-                  strokeWidth={30}
-                  percent={50}
-                  showInfo={false}
-                />
+                <div className="answered-question-progress-bar">
+                  <Progress
+                    type="line"
+                    strokeWidth={30}
+                    percent={optionTwoVotePercentage}
+                    showInfo={false}
+                  />
+                  <span className="answered-question-progress-bar-percent">{`${optionTwoVotePercentage}%`}</span>
+                </div>
               </div>
             )}
             {status === null && (
@@ -153,7 +168,8 @@ function mapStateToProps({ authedUser, users, questions }, { id, status }) {
   const optionOneText = question.optionOne.text;
   const optionTwoText = question.optionTwo.text;
   const { author } = question;
-
+  const optionOneVotes = question.optionOne.votes;
+  const optionTwoVotes = question.optionTwo.votes;
   const name = users[author].name;
 
   return {
@@ -164,6 +180,8 @@ function mapStateToProps({ authedUser, users, questions }, { id, status }) {
       optionTwoText,
       author,
     },
+    optionOneVotes,
+    optionTwoVotes,
     status,
   };
 }

@@ -192,6 +192,7 @@ li {
 
 .ant-progress-inner {
   border-radius: 0.3rem;
+  background-color: white;
 }
 
 .ant-progress-bg {
@@ -201,6 +202,17 @@ li {
 .answered-question-vertical-divider {
   border-top: 1px solid #52c41a;
   margin: 15px 0;
+}
+
+.answered-question-progress-bar {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.answered-question-progress-bar-percent {
+  padding: 0 5px;
+  align-self: center;
+  width: 40px;
 }
 /* Question Card End */
 
