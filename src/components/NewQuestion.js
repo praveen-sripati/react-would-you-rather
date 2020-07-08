@@ -58,6 +58,7 @@ class NewQuestion extends Component {
           size="large"
           placeholder="Enter Option One Text Here"
           onChange={this.handleOnChangeTextOne}
+          maxLength={60}
         />
         <Divider type="horizontal" style={{ margin: '1rem 0' }}>
           OR
@@ -66,6 +67,7 @@ class NewQuestion extends Component {
           size="large"
           placeholder="Enter Option One Text Here"
           onChange={this.handleOnChangeTextTwo}
+          maxLength={60}
         />
         <Button
           size="large"
