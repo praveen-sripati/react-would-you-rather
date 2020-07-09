@@ -2,24 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginImage from '../icons/would-you-rather.png';
 import { Card, Divider, Select, Button } from 'antd';
-import { CaretUpOutlined } from '@ant-design/icons';
+import { CaretDownOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
+import { setAuthedUser } from '../store/actions/authedUser';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 const { Title, Text } = Typography;
 
 class Login extends Component {
-
   state = {
-    selectedUser: ''
-  }
+    selectedUser: '',
+  };
+
+  handleSignIn = (e) => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    const { selectedUser } = this.state;
+
+    dispatch(showLoading());
+    dispatch(setAuthedUser(selectedUser));
+    dispatch(hideLoading());
+  };
 
   handleChange = (value) => {
     this.setState({
-      selectedUser: value
-    })
-  }
+      selectedUser: value,
+    });
+  };
 
   render() {
+    const { selectedUser } = this.state;
     const { totalUsers } = this.props;
     return (
       <Card className="login-card">
@@ -39,13 +52,18 @@ class Login extends Component {
           </div>
           <div className="login-form-details">
             <Select
-              defaultValue="lucy"
+              defaultValue="Select User"
               style={{ width: '100%' }}
-              suffixIcon={<CaretUpOutlined />}
+              suffixIcon={<CaretDownOutlined />}
               onChange={this.handleChange}
               options={totalUsers}
             />
-            <Button type="primary" className="login-submit-btn">
+            <Button
+              type="primary"
+              className="login-submit-btn"
+              onClick={this.handleSignIn}
+              disabled={this.state.selectedUser === ''}
+            >
               Sign In
             </Button>
           </div>
@@ -56,7 +74,10 @@ class Login extends Component {
 }
 
 function mapStateToProps({ users }) {
-  const totalUsers = Object.keys(users).map(user => ({label:users[user].name, value: users[user].id}))
+  const totalUsers = Object.keys(users).map((user) => ({
+    label: users[user].name,
+    value: users[user].id,
+  }));
   return {
     totalUsers,
   };

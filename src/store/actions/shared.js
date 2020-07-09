@@ -5,7 +5,6 @@ import { setAuthedUser } from './authedUser';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { saveQuestion } from '../../utils/api';
 
-const AUTHED_ID = 'sarahedo';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 
@@ -15,7 +14,7 @@ export function handleInitialData() {
     return getInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(setAuthedUser(null));
       dispatch(hideLoading());
     });
   };
