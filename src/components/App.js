@@ -24,45 +24,34 @@ class App extends Component {
   }
 
   render() {
-    const { loading, authedUser } = this.props;
-    console.log(this.props);
+    const { authedUser } = this.props;
     return (
       <Router>
         <Layout className="container">
           <NavBar />
-          {loading ? (
-            <Spin
-              className="loading"
-              tip=" Loading..."
-              indicator={<LoadingOutlined style={{ fontSize: '32px' }} />}
+          <Switch>
+            <Route exact path="/">
+              {authedUser ? <Home /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/new">
+              {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/leaderboard">
+              {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
+            </Route>
+            <Route
+              exact
+              path="/question/:id"
+              render={({ match }) =>
+                authedUser ? (
+                  <QuestionPage match={match} />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
             />
-          ) : (
-            <Fragment>
-              <Switch>
-                <Route exact path="/">
-                  {authedUser ? <Home /> : <Redirect to="/login" />}
-                </Route>
-                <Route exact path="/new">
-                  {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
-                </Route>
-                <Route exact path="/leaderboard">
-                  {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
-                </Route>
-                <Route
-                  exact
-                  path="/question/:id"
-                  render={({ match }) =>
-                    authedUser ? (
-                      <QuestionPage match={match} />
-                    ) : (
-                      <Redirect to="/login" />
-                    )
-                  }
-                ></Route>
-                <Route exact path="/login" component={Login} />
-              </Switch>
-            </Fragment>
-          )}
+            <Route exact path="/login" component={Login} />
+          </Switch>
         </Layout>
       </Router>
     );
@@ -72,7 +61,6 @@ class App extends Component {
 function mapStateToProps({ authedUser }) {
   return {
     authedUser,
-    loading: authedUser === null,
   };
 }
 
