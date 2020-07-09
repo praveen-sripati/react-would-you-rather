@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     const { authedUser } = this.props;
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Layout className="container">
           <NavBar />
           <Switch>
