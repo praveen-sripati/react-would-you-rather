@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,8 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Layout } from 'antd';
 import { handleInitialData } from '../store/actions/shared';
 
 // Main Components

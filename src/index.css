@@ -314,13 +314,53 @@ li {
 
 /* User Card End */
 
-/* Loading Spinner */
+/* Login Card */
 
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
+.login-card {
+  margin: 0 auto;
+  width: 75%;
 }
 
-/* Loading Spinner End */
+.login-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-title-details {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-content-divider {
+  margin: 1rem 0;
+}
+
+.login-content-details {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.login-form-details {
+  margin: 1rem 0 0 0;
+  padding: 0 1rem;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-dropdown-btn, .login-submit-btn {
+  width: 100%;
+}
+
+.login-submit-btn {
+  margin-top: 1rem;
+}
+
+/* Login Card End */
