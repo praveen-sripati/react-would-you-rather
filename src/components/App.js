@@ -25,6 +25,7 @@ class App extends Component {
 
   render() {
     const { loading, authedUser } = this.props;
+    console.log(this.props);
     return (
       <Router>
         <Layout className="container">
@@ -43,16 +44,21 @@ class App extends Component {
                 </Route>
                 <Route exact path="/new">
                   {authedUser ? <NewQuestion /> : <Redirect to="/login" />}
-
                 </Route>
                 <Route exact path="/leaderboard">
                   {authedUser ? <LeaderBoard /> : <Redirect to="/login" />}
-                  <LeaderBoard />
                 </Route>
-                <Route exact path="/question/:id">
-                  {authedUser ? <QuestionPage /> : <Redirect to="/login" />}
-                  <QuestionPage />
-                </Route>
+                <Route
+                  exact
+                  path="/question/:id"
+                  render={({ match }) =>
+                    authedUser ? (
+                      <QuestionPage match={match} />
+                    ) : (
+                      <Redirect to="/login" />
+                    )
+                  }
+                ></Route>
                 <Route exact path="/login" component={Login} />
               </Switch>
             </Fragment>
