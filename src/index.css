@@ -230,7 +230,7 @@ li {
 /* Question Card End */
 
 /* Question Page */
-.question-page-container, .leaderboard-container {
+.question-page-container {
   margin: 0 auto;
   width: 75%;
 }
@@ -254,6 +254,15 @@ li {
 }
 
 /* New Question End */
+
+/* LeaderBoard */
+.leaderboard-container {
+  display: grid;
+  grid-gap: 1rem;
+  margin: 0 auto;
+  width: 75%;
+}
+/* LeaderBoard End */
 
 /* User Card */
 
