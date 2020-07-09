@@ -10,7 +10,9 @@ class LeaderBoard extends Component {
         {totalScoresOfUsers.map((user) => (
           <User key={user.user} userScoreInfo={user} />
         ))}
-        <span style={{textAlign: "center"}}>Icons by <a href="https://icons8.com" target="_blank">Icons8</a></span>
+        <span style={{ textAlign: 'center' }}>
+          Icons by <a href="https://icons8.com/" target="blank">Icons8</a>
+        </span>
       </div>
     );
   }
@@ -30,8 +32,8 @@ function mapStateToProps({ users }) {
     });
 
   totalScoresOfUsers = totalScoresOfUsers.map((user, index) => {
-    return {...user, index}
-  })
+    return { ...user, index };
+  });
 
   return { totalScoresOfUsers };
 }
