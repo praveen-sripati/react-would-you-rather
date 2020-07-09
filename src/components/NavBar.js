@@ -8,13 +8,20 @@ import {
   PlusOutlined,
   HomeOutlined,
   LogoutOutlined,
+  LoginOutlined,
 } from '@ant-design/icons';
+import { setAuthedUser } from '../store/actions/authedUser';
 
 const { Text } = Typography;
 
 class NavBar extends Component {
+  handleLogOut = (e) => {
+    const { dispatch } = this.props;
+    dispatch(setAuthedUser(null));
+  };
+
   render() {
-    const { user } = this.props;
+    const { user, authedUser } = this.props;
 
     return (
       <nav className="nav">
@@ -49,10 +56,22 @@ class NavBar extends Component {
                 />
               </Text>
             ) : null}
-            <NavLink to="/login" exact activeClassName="active">
-              <LogoutOutlined />
-              <span className="nav-title">Logout</span>
-            </NavLink>
+            {authedUser ? (
+              <NavLink
+                to="/login"
+                exact
+                activeClassName="active"
+                onClick={this.handleLogOut}
+              >
+                <LogoutOutlined />
+                <span className="nav-title">Logout</span>
+              </NavLink>
+            ) : (
+              <NavLink to="/login" exact activeClassName="active">
+                <LoginOutlined />
+                <span className="nav-title">Login</span>
+              </NavLink>
+            )}
           </li>
         </ul>
         <LoadingBar />
@@ -64,6 +83,7 @@ class NavBar extends Component {
 function mapStateToProps({ authedUser, users }) {
   const user = users[authedUser];
   return {
+    authedUser,
     user,
   };
 }

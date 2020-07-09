@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginImage from '../icons/would-you-rather.png';
 import { Card, Divider, Select, Button } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { setAuthedUser } from '../store/actions/authedUser';
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 const { Title, Text } = Typography;
 
@@ -20,9 +20,7 @@ class Login extends Component {
     const { dispatch } = this.props;
     const { selectedUser } = this.state;
 
-    dispatch(showLoading());
     dispatch(setAuthedUser(selectedUser));
-    dispatch(hideLoading());
   };
 
   handleChange = (value) => {
@@ -33,7 +31,7 @@ class Login extends Component {
 
   render() {
     const { selectedUser } = this.state;
-    const { totalUsers } = this.props;
+    const { totalUsers, authedUser } = this.props;
     return (
       <Card className="login-card">
         <div className="login-content">
@@ -60,12 +58,13 @@ class Login extends Component {
             />
             <Button
               type="primary"
-              className="login-submit-btn"
               onClick={this.handleSignIn}
-              disabled={this.state.selectedUser === ''}
+              className="login-submit-btn"
+              disabled={selectedUser === ''}
             >
               Sign In
             </Button>
+            {authedUser ? <Redirect to="/" /> : null}
           </div>
         </div>
       </Card>
@@ -73,12 +72,13 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ authedUser, users }) {
   const totalUsers = Object.keys(users).map((user) => ({
     label: users[user].name,
     value: users[user].id,
   }));
   return {
+    authedUser,
     totalUsers,
   };
 }
