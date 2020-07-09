@@ -6,6 +6,7 @@ const { Title, Text } = Typography;
 class User extends Component {
   render() {
     const {
+      index,
       user,
       name,
       userAnswers,
@@ -23,7 +24,27 @@ class User extends Component {
           </div>
           <Divider className="user-content-divider" type="vertical" />
           <div className="user-content-details">
-            <Title level={2}>{name}</Title>
+            <Title level={2}>
+              {name}
+              {index === 0 && (
+                <img
+                  alt="gold-medal-user"
+                  src="https://img.icons8.com/color/50/000000/prize.png"
+                />
+              )}
+              {index === 1 && (
+                <img
+                  alt="silver-medal-user"
+                  src="https://img.icons8.com/cotton/50/000000/first-place-ribbon--v1.png"
+                />
+              )}
+              {index === 2 && (
+                <img
+                  alt="bronze-medal-user"
+                  src="https://img.icons8.com/cotton/50/000000/first-place-ribbon--v2.png"
+                />
+              )}
+            </Title>
             <div>
               <Text strong>
                 Answered Questions{' '}
